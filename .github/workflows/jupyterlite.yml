@@ -1,0 +1,51 @@
+name: Publicar JupyterLite no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar JupyterLite
+        run: pip install -r jupyterlite/requirements.txt
+
+      - name: Preparar notebook e dados
+        run: python jupyterlite/preparar_conteudo.py content
+
+      - name: Baixar wheels do ipywidgets
+        run: pip download --no-deps -d wheels ipywidgets==8.1.9 widgetsnbextension jupyterlab_widgets comm
+
+      - name: Gerar o site
+        run: jupyter lite build --contents content $(for w in wheels/*.whl; do echo --piplite-wheels $w; done) --output-dir dist
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

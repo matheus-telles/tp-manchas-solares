@@ -1,5 +1,7 @@
 # ☀️ Manchas Solares — Análise de Ciclos Solares em Python
 
+[![Abrir no navegador](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](https://matheus-telles.github.io/tp-manchas-solares/lab/index.html?path=TP_Matheus_de_Sousa.ipynb)
+
 Trabalho prático da disciplina **DCC001 – Programação de Computadores** (UFMG, 2º semestre de 2025), cursada quando eu ainda estava em Engenharia de Minas. Professor: José de Siqueira.
 
 **Nota do trabalho:** 116,8 · **Nota final na disciplina:** 100/100 (a soma das notas chegou a 148,5 por causa do trabalho e foi limitada ao máximo de 100)
@@ -31,7 +33,17 @@ A interface (feita com `ipywidgets`) tem quatro abas:
 
 Com o método mínimo a mínimo e a janela padrão, os mínimos detectados ficam a poucos meses das datas oficiais de início de cada ciclo, do ciclo 2 (1766) ao ciclo 25 (2019). A conclusão foi que definir os ciclos pelos mínimos da média suavizada é o critério mais preciso, o mesmo adotado oficialmente. As pequenas diferenças vêm do fato de as datas oficiais terem passado por revisões manuais, enquanto o programa aplica a mesma regra a toda a série.
 
-## Como executar
+## Testar no navegador
+
+**[Abrir o notebook online](https://matheus-telles.github.io/tp-manchas-solares/lab/index.html?path=TP_Matheus_de_Sousa.ipynb)**, sem instalar nada. O Python roda no próprio navegador via [JupyterLite](https://jupyterlite.readthedocs.io/).
+
+1. Espere o kernel carregar (o primeiro acesso leva alguns segundos).
+2. Vá em **Run → Run All Cells**.
+3. Role até o fim da seção 3: a interface com as quatro abas aparece abaixo do código.
+
+O site é gerado automaticamente pelo GitHub Actions a cada push em `main` (veja `.github/workflows/jupyterlite.yml`).
+
+## Como executar localmente
 
 ```bash
 git clone https://github.com/matheus-telles/tp-manchas-solares.git
